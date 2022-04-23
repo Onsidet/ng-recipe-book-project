@@ -1,10 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  template: `
+  <app-header></app-header>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  `,
+  styles: [``]
 })
-export class AppComponent {
-  title = 'ng-coure-recipe-book';
+export class AppComponent implements OnInit {
+  constructor(private authService:AuthService) { }
+
+  ngOnInit(): void {
+    this.authService.autoLogin();
+  }
 }
